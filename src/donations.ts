@@ -41,27 +41,21 @@ const qrX = 7
 const shovel = readFileSync("src/shovel.png")
 const qr = readFileSync("src/my_QR.png")
 
-const generate = async () => {
-    // const qr = await toBuffer("https://t.me/gravelcyclist", {
-    //     margin: 0,
-    //     scale: 10
-    // })
-
+const generate = () => {
     
     doc.addPage()
         
+    // -
+
     doc.setFillColor("black")
     doc.rect(10, firstOffsetY, pageWidth - 17, 25, "f")
     doc.addImage(qr, qrX, firstOffsetY, 25, 25)
     doc.addImage(qr, pageWidth - 25 - 7, firstOffsetY, 25, 25)
 
-    // -
-
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
     doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY)
-
 
     doc.addImage(shovel, headX + glyphX, firstOffsetY + 3, 15, 20)
 
@@ -71,10 +65,8 @@ const generate = async () => {
     doc.text("DONATION", middleX, 80, {
         align: "center"
     })
-    
 
     doc.addImage(qr, 40, 100, 70, 70)
-
 
     doc.setFont("r", "r")
     doc.setTextColor("black")
@@ -82,20 +74,21 @@ const generate = async () => {
     doc.text("Анатолий Анатольевич Н.", 40, pageHeight - 25)
     doc.text("+7 963 650 6091", 40, pageHeight - 12)
 
+    // -
+
     doc.addPage()
+
+    // -
 
     doc.setFillColor("black")
     doc.rect(10, firstOffsetY, pageWidth - 17, 25, "f")
     doc.addImage(qr, qrX, firstOffsetY, 25, 25)
     doc.addImage(qr, pageWidth - 25 - 7, firstOffsetY, 25, 25)
 
-    // -
-
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
     doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY)
-
 
     doc.addImage(shovel, headX + glyphX, firstOffsetY + 3, 15, 20)
 
@@ -118,7 +111,6 @@ const generate = async () => {
     doc.setFontSize(headFont)
     doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY + middleY)
 
-
     doc.addImage(shovel, headX + glyphX, firstOffsetY + 3 + middleY, 15, 20)
 
     doc.setFont("kallisto", "normal-bold")
@@ -128,9 +120,13 @@ const generate = async () => {
         align: "center"
     })
 
+    // -
 
     doc.line(4, middleY, 9, middleY)
     doc.line(pageWidth - 9, middleY, pageWidth - 4, middleY)
+
+    // -
+
     doc
         .deletePage(1)
         .save("src/donations.pdf")

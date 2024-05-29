@@ -58,29 +58,30 @@ const generate = async () => {
 
     range(1, 51).reverse().map(N => {
     
+        doc.addPage()
+        
+        // -
+
+        doc.line(4, firstOffsetY - 4, 9, firstOffsetY-4)
+        doc.line(pageWidth - 9, firstOffsetY - 4, pageWidth - 4, firstOffsetY - 4)
+
+        // -
+
         const numberStr = `${N.toString().length === 1 ? "0" : ""}${N.toString()}`
         const numberReverseX = getReverseNumberX(
             [ ...numberStr.matchAll(/1/g)].length,
             numberX
         )
         
-        doc.addPage()
-        
-        doc.line(4, firstOffsetY - 4, 9, firstOffsetY-4)
-        doc.line(pageWidth - 9, firstOffsetY - 4, pageWidth - 4, firstOffsetY - 4)
-
         doc.setFillColor("black")
         doc.rect(10, firstOffsetY, pageWidth - 20, 25, "f")
         doc.addImage(qr, 4, firstOffsetY, 25, 25)
         doc.addImage(qr, pageWidth - 29, firstOffsetY, 25, 25)
 
-        // -
-
         doc.setFont("france", "bold")
         doc.setTextColor("white")
         doc.setFontSize(headFont)
         doc.text("Tour de klenovo", headX, firstOffsetY + headY)
-
 
         doc.setFont("france-glyphs", "normal")
         doc.setTextColor("white")
@@ -113,23 +114,26 @@ const generate = async () => {
         doc.setTextColor("black")
         doc.setFontSize(17)
 
+        // -
+
         "tour de klenovo".split("").reduce((offsetY: number, ch) => {
             doc.text(ch, middleX + 1, offsetY)
             return offsetY + 3.2 
         }, firstOffsetY + 32)
 
-        const numberAppend = 50
-        const number2Str = `${(N + numberAppend).toString().length === 1 ? "0" : ""}${(N + numberAppend).toString()}`
-        const numberReverse2X = getReverseNumberX(
-            [ ...number2Str.matchAll(/1/g)].length,
-            numberX
-        )
+        // -
 
         doc.line(4, secondOffsetY - 4, 9, secondOffsetY-4)
         doc.line(pageWidth - 9, secondOffsetY - 4, pageWidth - 4, secondOffsetY - 4)
 
-        doc.line(4, secondOffsetY - 4 + 84, 9, secondOffsetY-4 + 84)
-        doc.line(pageWidth - 9, secondOffsetY - 4 + 84, pageWidth - 4, secondOffsetY - 4 + 84)
+        // -
+
+        const N2 = N + 50
+        const number2Str = `${N2.toString().length === 1 ? "0" : ""}${N2.toString()}`
+        const numberReverse2X = getReverseNumberX(
+            [ ...number2Str.matchAll(/1/g)].length,
+            numberX
+        )
 
         doc.setFillColor("black")
         doc.rect(10, secondOffsetY, pageWidth - 20, 25, "f")
@@ -175,10 +179,17 @@ const generate = async () => {
         doc.setTextColor("black")
         doc.setFontSize(17)
 
+        // -
+
         "tour de klenovo".split("").reduce((offsetY: number, ch) => {
             doc.text(ch, middleX + 1, offsetY)
             return offsetY + 3.2 
         }, secondOffsetY + 32)
+
+        // -
+
+        doc.line(4, secondOffsetY - 4 + 84, 9, secondOffsetY-4 + 84)
+        doc.line(pageWidth - 9, secondOffsetY - 4 + 84, pageWidth - 4, secondOffsetY - 4 + 84)
 
     })
 
