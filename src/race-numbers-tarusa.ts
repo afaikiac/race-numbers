@@ -11,11 +11,11 @@ const doc = new jsPDF({
     putOnlyUsedFonts:true
 })
 
-doc.addFont("scripts/klenovo/Sudfrance/sudfrancebevel.ttf", "france", "bevel")
-doc.addFont("scripts/klenovo/Sudfrance/sudfrancebold.ttf", "france", "bold")
-doc.addFont("scripts/klenovo/Kallisto/KallistoBoldItalic.ttf", "kallisto", "italic-bold")
-doc.addFont("scripts/klenovo/Kallisto/KallistoBold.ttf", "kallisto", "normal-bold")
-doc.addFont("scripts/klenovo/Sudfrance/sudfrancedingbatz.ttf", "france-glyphs", "normal")
+doc.addFont("src/Sudfrance/sudfrancebevel.ttf", "france", "bevel")
+doc.addFont("src/Sudfrance/sudfrancebold.ttf", "france", "bold")
+doc.addFont("src/Kallisto/KallistoBoldItalic.ttf", "kallisto", "italic-bold")
+doc.addFont("src/Kallisto/KallistoBold.ttf", "kallisto", "normal-bold")
+doc.addFont("src/Sudfrance/sudfrancedingbatz.ttf", "france-glyphs", "normal")
 
 const pageWidth = doc.internal.pageSize.getWidth()
 const pageHeight = doc.internal.pageSize.getHeight()
@@ -25,16 +25,16 @@ const middleY = pageHeight / 2
 
 const firstOffsetY = 7
 const secondOffsetY = firstOffsetY + 147.5  
-const headX = 36 
+const headX = 45 
 const headY = 17.5
-const headFont = 54
-const headPicX = 111
+const headFont = 60
+const headPicX = 83 
 const headPicY = 3 
 const numberY = 110.5
 const numberFont = 210
 const qrX = 7
 
-const shovel = readFileSync("scripts/klenovo/shovel.png")
+const shovel = readFileSync("src/hammer.png")
 
 const generate = async () => {
     const qr = await toBuffer("https://t.me/gravelcyclist", {
@@ -42,7 +42,7 @@ const generate = async () => {
         scale: 10
     })
 
-    range(1, 151).reverse().map(N => {
+    range(1, 51).reverse().map(N => {
     
         doc.addPage()
 
@@ -61,9 +61,9 @@ const generate = async () => {
         doc.setFont("france", "bold")
         doc.setTextColor("white")
         doc.setFontSize(headFont)
-        doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY)
+        doc.text("Gravelcyclist   2024", headX, firstOffsetY + headY)
 
-        doc.addImage(shovel, headX + headPicX, firstOffsetY + headPicY, 15, 20)
+        doc.addImage(shovel, headX + headPicX, firstOffsetY + headPicY, 15, 18)
 
         doc.setFont("kallisto", "normal-bold")
         doc.setTextColor("black")
@@ -74,7 +74,7 @@ const generate = async () => {
 
         // -
 
-        const N2 = N + 150
+        const N2 = N + 50 
         const number2Str = `${N2.toString().length === 1
             ? "00"
             : N2.toString().length === 2
@@ -91,9 +91,9 @@ const generate = async () => {
         doc.setFont("france", "bold")
         doc.setTextColor("white")
         doc.setFontSize(headFont)
-        doc.text("Tarusa Gravel Race   2024", headX, secondOffsetY + headY)
+        doc.text("Gravelcyclist   2024", headX, secondOffsetY + headY)
 
-        doc.addImage(shovel, headX + headPicX, secondOffsetY + headPicY, 15, 20)
+        doc.addImage(shovel, headX + headPicX, secondOffsetY + headPicY, 15, 18)
 
         doc.setFont("kallisto", "normal-bold")
         doc.setTextColor("black")
@@ -105,7 +105,7 @@ const generate = async () => {
 
     doc
         .deletePage(1)
-        .save("scripts/klenovo/race-numbers-tarusa.pdf")
+        .save("race-numbers-tarusa.pdf")
 }
 
 generate()
