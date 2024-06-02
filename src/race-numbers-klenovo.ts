@@ -11,11 +11,11 @@ const doc = new jsPDF({
     putOnlyUsedFonts:true
 })
 
-doc.addFont("scripts/klenovo/Sudfrance/sudfrancebevel.ttf", "france", "bevel")
-doc.addFont("scripts/klenovo/Sudfrance/sudfrancebold.ttf", "france", "bold")
-doc.addFont("scripts/klenovo/Kallisto/KallistoBoldItalic.ttf", "kallisto", "italic-bold")
-doc.addFont("scripts/klenovo/Kallisto/KallistoBold.ttf", "kallisto", "normal-bold")
-doc.addFont("scripts/klenovo/Sudfrance/sudfrancedingbatz.ttf", "france-glyphs", "normal")
+doc.addFont("src/Sudfrance/sudfrancebevel.ttf", "france", "bevel")
+doc.addFont("src/Sudfrance/sudfrancebold.ttf", "france", "bold")
+doc.addFont("src/Kallisto/KallistoBoldItalic.ttf", "kallisto", "italic-bold")
+doc.addFont("src/Kallisto/KallistoBold.ttf", "kallisto", "normal-bold")
+doc.addFont("src/Sudfrance/sudfrancedingbatz.ttf", "france-glyphs", "normal")
 
 const pageWidth = doc.internal.pageSize.getWidth()
 const pageHeight = doc.internal.pageSize.getHeight()
@@ -23,18 +23,18 @@ const pageHeight = doc.internal.pageSize.getHeight()
 const middleX = pageWidth / 2
 const middleY = pageHeight / 2
 
-const firstOffsetY = 25 
-const secondOffsetY = firstOffsetY + 84 
-const headX = 34 
+const firstOffsetY = 25
+const secondOffsetY = firstOffsetY + 84
+const headX = 37
 const headReverseX = 52 - headX
 const headY = 17.5
 const headFont = 55
-const glyphX = 86 
-const glyphY = 13 
-const glyphFont = 40 
-const numberX = 7 
+const glyphX = 86
+const glyphY = 13
+const glyphFont = 40
+const numberX = 7
 const numberY = 75
-const numberFont = 180 
+const numberFont = 180
 
 const getRandomChar = () => {
     const str = "ADGHUVZT"
@@ -62,8 +62,8 @@ const generate = async () => {
         
         // -
 
-        doc.line(4, firstOffsetY - 4, 9, firstOffsetY-4)
-        doc.line(pageWidth - 9, firstOffsetY - 4, pageWidth - 4, firstOffsetY - 4)
+        doc.line(7, firstOffsetY - 4, 9, firstOffsetY-4)
+        doc.line(pageWidth - 9, firstOffsetY - 4, pageWidth - 7, firstOffsetY - 4)
 
         // -
 
@@ -75,8 +75,8 @@ const generate = async () => {
         
         doc.setFillColor("black")
         doc.rect(10, firstOffsetY, pageWidth - 20, 25, "f")
-        doc.addImage(qr, 4, firstOffsetY, 25, 25)
-        doc.addImage(qr, pageWidth - 29, firstOffsetY, 25, 25)
+        doc.addImage(qr, 7, firstOffsetY, 25, 25)
+        doc.addImage(qr, pageWidth - 32, firstOffsetY, 25, 25)
 
         doc.setFont("france", "bold")
         doc.setTextColor("white")
@@ -123,8 +123,8 @@ const generate = async () => {
 
         // -
 
-        doc.line(4, secondOffsetY - 4, 9, secondOffsetY-4)
-        doc.line(pageWidth - 9, secondOffsetY - 4, pageWidth - 4, secondOffsetY - 4)
+        doc.line(7, secondOffsetY - 4, 9, secondOffsetY-4)
+        doc.line(pageWidth - 9, secondOffsetY - 4, pageWidth - 7, secondOffsetY - 4)
 
         // -
 
@@ -137,8 +137,8 @@ const generate = async () => {
 
         doc.setFillColor("black")
         doc.rect(10, secondOffsetY, pageWidth - 20, 25, "f")
-        doc.addImage(qr, 4, secondOffsetY, 25, 25)
-        doc.addImage(qr, pageWidth - 29, secondOffsetY, 25, 25)
+        doc.addImage(qr, 7, secondOffsetY, 25, 25)
+        doc.addImage(qr, pageWidth - 32, secondOffsetY, 25, 25)
 
         // -
 
@@ -188,14 +188,14 @@ const generate = async () => {
 
         // -
 
-        doc.line(4, secondOffsetY - 4 + 84, 9, secondOffsetY-4 + 84)
-        doc.line(pageWidth - 9, secondOffsetY - 4 + 84, pageWidth - 4, secondOffsetY - 4 + 84)
+        doc.line(7, secondOffsetY - 4 + 84, 9, secondOffsetY - 4 + 84)
+        doc.line(pageWidth - 9, secondOffsetY - 4 + 84, pageWidth - 7, secondOffsetY - 4 + 84)
 
     })
 
     doc
         .deletePage(1)
-        .save("scripts/klenovo/race-numbers-klenovo.pdf")
+        .save("race-numbers-klenovo.pdf")
 }
 
 generate()
