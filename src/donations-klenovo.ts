@@ -16,7 +16,7 @@ doc.addFont("src/Sudfrance/sudfrancebold.ttf", "france", "bold")
 doc.addFont("src/Kallisto/KallistoBoldItalic.ttf", "kallisto", "italic-bold")
 doc.addFont("src/Kallisto/KallistoBold.ttf", "kallisto", "normal-bold")
 doc.addFont("src/Sudfrance/sudfrancedingbatz.ttf", "france-glyphs", "normal")
-doc.addFont("src/Roboto/Roboto-Regular.ttf", "r", "r")
+doc.addFont("src/Neucha/Neucha-Regular.ttf", "neucha", "regular")
 
 const pageWidth = doc.internal.pageSize.getWidth()
 const pageHeight = doc.internal.pageSize.getHeight()
@@ -30,34 +30,50 @@ const headX = 65
 const headReverseX = 52 - headX
 const headY = 17.5
 const headFont = 54
-const glyphX = 111
+const glyphX = 101
 const glyphY = 13 
 const glyphFont = 40 
 const numberX = 7
 const numberY = 110.5
 const numberFont = 210
 const qrX = 7
+const sberX = 118
+const sberY = 150
 
 const shovel = readFileSync("src/shovel.png")
-const qr = readFileSync("src/my_QR.png")
+const sber = readFileSync("src/sber.png")
+const qrSbp = readFileSync("src/my_QR.png")
+const arrow = readFileSync("src/arrow.png")
+const arrow2 = readFileSync("src/arrow2.png")
 
-const generate = () => {
+const generate = async () => {
+
+
+    const qrTg = await toBuffer("https://t.me/tourdeklenovo", {
+        margin: 0,
+        scale: 10
+    })
     
     doc.addPage()
         
     // -
 
     doc.setFillColor("black")
-    doc.rect(10, firstOffsetY, pageWidth - 17, 25, "f")
-    doc.addImage(qr, qrX, firstOffsetY, 25, 25)
-    doc.addImage(qr, pageWidth - 25 - 7, firstOffsetY, 25, 25)
+    doc.rect(7, firstOffsetY, pageWidth - 14, 25, "f")
+    doc.addImage(qrTg, qrX, firstOffsetY, 25, 25)
+    doc.addImage(qrTg, pageWidth - 25 - 7, firstOffsetY, 25, 25)
 
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
-    doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY)
+    doc.text("Tour de Klenovo    2024", middleX, firstOffsetY + headY, {
+        align: "center"
+    })
 
-    doc.addImage(shovel, headX + glyphX, firstOffsetY + 3, 15, 20)
+    doc.setFont("france-glyphs", "normal")
+    doc.setTextColor("white")
+    doc.setFontSize(glyphFont)
+    doc.text("D", headX + glyphX, firstOffsetY + glyphY)
 
     doc.setFont("kallisto", "normal-bold")
     doc.setTextColor("black")
@@ -66,13 +82,26 @@ const generate = () => {
         align: "center"
     })
 
-    doc.addImage(qr, 40, 100, 70, 70)
+    doc.addImage(qrSbp, 30, 110, 70, 70)
 
-    doc.setFont("r", "r")
+    doc.setLineWidth(2)
+    doc.roundedRect(30-2.5, 110 - 2.5, 75, 75, 0.5, 0.5)
+
+    doc.roundedRect(165, 110 - 2.5 + 75 - 20, pageWidth - 165 - 30, 20, 0.5, 0.5)
+
+    doc.setFont("neucha", "regular")
     doc.setTextColor("black")
     doc.setFontSize(30)
-    doc.text("Анатолий Анатольевич Н.", 40, pageHeight - 25)
-    doc.text("+7 963 650 6091", 40, pageHeight - 12)
+    doc.text("Анатолий Анатольевич Н.", pageWidth - 30, 117, {
+        align: "right"
+    })
+    doc.text("тел. +7 (963) 650-60-91", 165, 130)
+
+    doc.setFontSize(35)
+    doc.text("Сбер", sberX, sberY)
+    doc.addImage(sber, sberX + 25, sberY - 9, 10, 10)
+    doc.addImage(arrow2, sberX - 9, sberY - 33, 20, 20)
+    doc.addImage(arrow, sberX + 19, sberY - 33, 20, 20)
 
     // -
 
@@ -81,16 +110,21 @@ const generate = () => {
     // -
 
     doc.setFillColor("black")
-    doc.rect(10, firstOffsetY, pageWidth - 17, 25, "f")
-    doc.addImage(qr, qrX, firstOffsetY, 25, 25)
-    doc.addImage(qr, pageWidth - 25 - 7, firstOffsetY, 25, 25)
+    doc.rect(7, firstOffsetY, pageWidth - 14, 25, "f")
+    doc.addImage(qrTg, qrX, firstOffsetY, 25, 25)
+    doc.addImage(qrTg, pageWidth - 25 - 7, firstOffsetY, 25, 25)
 
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
-    doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY)
+    doc.text("Tour de Klenovo    2024", middleX, firstOffsetY + headY, {
+        align: "center"
+    })
 
-    doc.addImage(shovel, headX + glyphX, firstOffsetY + 3, 15, 20)
+    doc.setFont("france-glyphs", "normal")
+    doc.setTextColor("white")
+    doc.setFontSize(glyphFont)
+    doc.text("D", headX + glyphX, firstOffsetY + glyphY)
 
     doc.setFont("kallisto", "normal-bold")
     doc.setTextColor("black")
@@ -99,19 +133,30 @@ const generate = () => {
         align: "center"
     })
 
-    doc.setFillColor("black")
-    doc.rect(10, firstOffsetY + middleY, pageWidth - 17, 25, "f")
-    doc.addImage(qr, qrX, firstOffsetY + middleY, 25, 25)
-    doc.addImage(qr, pageWidth - 25 - 7, firstOffsetY + middleY, 25, 25)
+    // -
+
+    doc.setLineWidth(0.1)
+    doc.line(4, middleY, 9, middleY)
+    doc.line(pageWidth - 9, middleY, pageWidth - 4, middleY)
 
     // -
+
+    doc.setFillColor("black")
+    doc.rect(7, firstOffsetY + middleY, pageWidth - 14, 25, "f")
+    doc.addImage(qrTg, qrX, firstOffsetY + middleY, 25, 25)
+    doc.addImage(qrTg, pageWidth - 25 - 7, firstOffsetY + middleY, 25, 25)
 
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
-    doc.text("Tarusa Gravel Race   2024", headX, firstOffsetY + headY + middleY)
+    doc.text("Tour de Klenovo    2024", middleX, firstOffsetY + headY + middleY, {
+        align: "center"
+    })
 
-    doc.addImage(shovel, headX + glyphX, firstOffsetY + 3 + middleY, 15, 20)
+    doc.setFont("france-glyphs", "normal")
+    doc.setTextColor("white")
+    doc.setFontSize(glyphFont)
+    doc.text("D", headX + glyphX, firstOffsetY + glyphY + middleY)
 
     doc.setFont("kallisto", "normal-bold")
     doc.setTextColor("black")
@@ -119,17 +164,12 @@ const generate = () => {
     doc.text("DONATION", middleX, 80 + middleY, {
         align: "center"
     })
-
-    // -
-
-    doc.line(4, middleY, 9, middleY)
-    doc.line(pageWidth - 9, middleY, pageWidth - 4, middleY)
-
+    
     // -
 
     doc
         .deletePage(1)
-        .save("src/donations.pdf")
+        .save("donations-klenovo.pdf")
 }
 
 generate()
