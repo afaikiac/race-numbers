@@ -29,8 +29,8 @@ const secondOffsetY = firstOffsetY + 147.5
 const headX = 65 
 const headReverseX = 52 - headX
 const headY = 17.5
-const headFont = 54
-const glyphX = 113
+const headFont = 60 
+const glyphX = 96 
 const glyphY = 13 
 const glyphFont = 40 
 const numberX = 7
@@ -66,7 +66,7 @@ const generate = async () => {
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
-    doc.text("Tarusa Gravel Race    2024", middleX, firstOffsetY + headY, {
+    doc.text("Gravelcyclist    2024", middleX, firstOffsetY + headY, {
         align: "center"
     })
 
@@ -117,7 +117,7 @@ const generate = async () => {
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
-    doc.text("Tour de Klenovo    2024", middleX, firstOffsetY + headY, {
+    doc.text("Gravelcyclist    2024", middleX, firstOffsetY + headY, {
         align: "center"
     })
 
@@ -149,7 +149,7 @@ const generate = async () => {
     doc.setFont("france", "bold")
     doc.setTextColor("white")
     doc.setFontSize(headFont)
-    doc.text("Tour de Klenovo    2024", middleX, firstOffsetY + headY + middleY, {
+    doc.text("Gravelcyclist    2024", middleX, firstOffsetY + headY + middleY, {
         align: "center"
     })
 
